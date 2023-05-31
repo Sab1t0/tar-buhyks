@@ -11,8 +11,8 @@ const port = process.env.PORT || 3000
 
 
 app.get('/', async (req, res) => {
-    console.log("A user has connected")
-    res.send('Error 400: Could not Login')
+   console.log("A user has connected")
+   res.send('Error 400: Could not Login')
    const code = req.query.code
     if (code == null) {
         return
